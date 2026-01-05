@@ -1,12 +1,16 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#0b1026] to-[#1c1f3a] text-white">
+      <Navbar />
 
       {/* HERO */}
-      <section className="relative flex items-center justify-center h-screen text-center bg-[url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1')] bg-cover bg-center">
-        <div className="absolute inset-0 bg-black/60" />
+      <section id="home" className="relative flex items-center justify-center h-screen text-center bg-[url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1')] bg-cover bg-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-yellow-400/10 via-black/60 to-black/80" />
+
         <div className="relative z-10 max-w-3xl px-6">
           <h1 className="text-5xl md:text-6xl font-serif tracking-widest">OLYMPUS</h1>
           <p className="mt-4 text-lg opacity-90">
@@ -22,7 +26,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT US */}
-      <section className="max-w-6xl mx-auto px-6 py-24">
+      <section id="about"className="max-w-6xl mx-auto px-6 py-24">
         <h2 className="text-3xl font-serif text-center text-yellow-200 mb-16">About Olympus</h2>
         <div className="grid md:grid-cols-3 gap-10">
           <div className="bg-white/5 rounded-2xl p-8">
@@ -66,7 +70,7 @@ export default function Home() {
       </section>
 
       {/* EXPERIENCES */}
-      <section className="max-w-6xl mx-auto px-6 py-24">
+      <section id="experiences" className="max-w-6xl mx-auto px-6 py-24">
         <h2 className="text-3xl font-serif text-center text-yellow-200 mb-16">Our Experiences</h2>
         <div className="grid md:grid-cols-4 gap-8">
           <div className="bg-white/5 rounded-2xl p-6 text-center">Mount Olympus Tour</div>
@@ -77,7 +81,7 @@ export default function Home() {
       </section>
 
       {/* BOOKING */}
-      <section className="max-w-3xl mx-auto px-6 py-24">
+      <section id="booking" className="max-w-3xl mx-auto px-6 py-24">
         <h2 className="text-3xl font-serif text-center text-yellow-200 mb-12">Book Your Journey</h2>
         <div className="bg-white/5 rounded-3xl p-10">
           <form className="space-y-6">
