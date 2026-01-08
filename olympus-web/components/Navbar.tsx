@@ -33,8 +33,9 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-10 text-sm tracking-widest uppercase">
           {[
             { label: "About", href: "#about" },
+            { label: "Rules Of Olympus", href: "#rules" },
             { label: "Experiences", href: "#experiences" },
-            { label: "Booking", href: "#booking" },
+            
           ].map((item) => (
             <a
               key={item.label}
