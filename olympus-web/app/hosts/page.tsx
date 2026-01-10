@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -36,6 +37,7 @@ const hosts = [
 export default function HostsPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black text-white px-6 py-32">
+        <Navbar />
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
