@@ -16,15 +16,13 @@ import { db } from "@/lib/firebase";
 export interface HostData {
   id?: string;
   name: string;
-  goddessName: string;
-  description: string;
-  image: string;
+  goddessName?: string;
+  description?: string;
+  image?: string;
   slug: string;
-  active?: boolean;
-  order?: number;
-  aura?: string;
-  createdAt?: any;
+  active: boolean;
 }
+
 
 export type PublicHost = {
   id: string;
