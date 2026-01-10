@@ -16,15 +16,14 @@ export default function Navbar() {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-700
       ${
         scrolled
-          ? "bg-black/80 backdrop-blur-xl  shadow-[0_10px_40px_rgba(0,0,0,0.6)]"
+          ? "bg-black/80 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.6)]"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
-
         {/* LOGO */}
         <a
-          href="#home"
+          href="/"
           className="font-serif text-xl md:text-2xl tracking-[0.35em]
           text-[#e6c36a]
           drop-shadow-[0_0_12px_rgba(200,161,74,0.45)]
@@ -37,9 +36,9 @@ export default function Navbar() {
         {/* MENU */}
         <div className="hidden md:flex items-center gap-12 text-xs tracking-[0.25em] uppercase">
           {[
-            { label: "About", href: "#about" },
-            { label: "Olympian Law", href: "#rules" },
-            { label: "Experiences", href: "#experiences" },
+            { label: "About", href: "/#about" },
+            { label: "Olympian Law", href: "/#rules" },
+            { label: "Hosts", href: "/hosts" },
           ].map((item) => (
             <a
               key={item.label}
