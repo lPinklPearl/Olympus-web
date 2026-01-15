@@ -7,7 +7,7 @@ export const isAdmin = (user: User | null) => {
   // 🔒 ใส่ email admin ของจริงตรงนี้
   const adminEmails = [
     "zeuslnwza007@gmail.com",
-    "pink@olympus.world",
+    "justadotow@gmail.com",
   ];
 
   return adminEmails.includes(user.email || "");
