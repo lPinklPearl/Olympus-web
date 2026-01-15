@@ -69,23 +69,50 @@ export default function Navbar() {
       </div>
 
       {/* MOBILE MENU */}
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-500
-        ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
+<div
+  className={`md:hidden overflow-hidden transition-all duration-700
+  ${open ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}
+>
+  <div
+    className="
+      relative
+      px-6 py-6
+      flex flex-col gap-5
+      text-sm tracking-[0.3em] uppercase
+
+      bg-black/90
+      backdrop-blur-xl
+      border-t border-[#e6c36a]/20
+      shadow-[0_20px_60px_rgba(0,0,0,0.8)]
+    "
+  >
+    {/* GOLD GLOW OVERLAY */}
+    <div
+      className="pointer-events-none absolute inset-0
+      bg-gradient-to-b
+      from-[#e6c36a]/10
+      via-transparent
+      to-transparent"
+    />
+
+    {menu.map((item) => (
+      <a
+        key={item.label}
+        href={item.href}
+        onClick={() => setOpen(false)}
+        className="
+          relative z-10
+          text-white/80
+          hover:text-[#e6c36a]
+          transition duration-500
+        "
       >
-        <div className="px-6 pb-6 flex flex-col gap-4 text-sm tracking-widest uppercase">
-          {menu.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="text-white/80 hover:text-[#e6c36a] transition"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </div>
+        {item.label}
+      </a>
+    ))}
+  </div>
+</div>
+
     </nav>
   );
 }
