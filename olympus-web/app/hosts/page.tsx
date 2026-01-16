@@ -97,7 +97,7 @@ export default function HostsPage() {
                       src={host.image}
                       alt={host.name}
                       className="w-full h-full object-cover scale-105
-                      group-hover:scale-110 transition duration-700"
+                      group-hover:scale-110 transition duration-700 object-top"
                     />
                   </div>
 

@@ -181,7 +181,7 @@ export default function AdminPage() {
                         <img
                           src={h.image}
                           alt={h.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                          className="w-full h-full object-cover group-hover:scale-110 transition duration-700 object-top"
                         />
                       </div>
                     )}
