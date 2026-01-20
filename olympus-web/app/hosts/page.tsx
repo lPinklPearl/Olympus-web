@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { getPublicHosts, PublicHost } from "@/lib/host.service";
 
 export default function HostsPage() {
@@ -33,8 +34,7 @@ export default function HostsPage() {
           THE HOSTS OF OLYMPUS
         </h1>
         <p className="opacity-75 max-w-2xl mx-auto leading-relaxed">
-          เหล่าโฮสต์ผู้สวมบทเทพ  
-          ผู้เฝ้าขอบเขต สนทนา และพิธีกรรมแห่งรัตติกาล
+          เหล่าโฮสต์ผู้สวมบทเทพ ผู้เฝ้าขอบเขต สนทนา และพิธีกรรมแห่งรัตติกาล
         </p>
       </motion.div>
 
@@ -58,12 +58,18 @@ export default function HostsPage() {
         >
           {hosts.map((host, i) => {
             const aura =
-              host.aura ??
-              "from-red-800/30 via-transparent to-transparent";
+              host.aura ?? "from-red-800/30 via-transparent to-transparent";
+
+            // ✅ รองรับ host[slug]
+            // ถ้าใน type มี host.slug อยู่แล้วก็ใช้ได้เลย
+            // ถ้าไม่มี แต่ API ส่งมาอยู่ ให้มันวิ่งได้ด้วยการ cast แบบปลอดภัย
+            const slug =
+              (host as any).slug ??
+              (host as any).id; // fallback กันพัง (เผื่อบางตัวไม่มี slug)
 
             return (
               <motion.div
-                key={host.id}
+                key={(host as any).id ?? slug}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -77,45 +83,70 @@ export default function HostsPage() {
                   opacity-0 group-hover:opacity-100 transition duration-700 blur-3xl`}
                 />
 
-                {/* Card */}
-                <div
-                  className="
-                    w-[360px]
-                    bg-black/70
-                    border border-[#e6c36a]/20
-                    rounded-3xl
-                    overflow-hidden
-                    backdrop-blur-md
-                    shadow-[0_0_40px_rgba(230,195,106,0.08)]
-                    group-hover:shadow-[0_0_80px_rgba(180,30,30,0.35)]
-                    transition-all duration-700
-                  "
-                >
-                  {/* Image */}
-                  <div className="h-72 overflow-hidden">
-                    <img
-                      src={host.image}
-                      alt={host.name}
-                      className="w-full h-full object-cover scale-105
-                      group-hover:scale-110 transition duration-700 object-top"
-                    />
+                {/* ✅ Clickable Card (ไป /host/[slug]) */}
+                <Link href={`/hosts/${slug}`} className="block">
+                  <div
+                    className="
+                      w-[360px]
+                      bg-black/70
+                      border border-[#e6c36a]/20
+                      rounded-3xl
+                      overflow-hidden
+                      backdrop-blur-md
+                      shadow-[0_0_40px_rgba(230,195,106,0.08)]
+                      group-hover:shadow-[0_0_80px_rgba(180,30,30,0.35)]
+                      transition-all duration-700
+                      cursor-pointer
+                    "
+                  >
+                    {/* Image */}
+                    <div className="h-72 overflow-hidden">
+                      <img
+                        src={host.image}
+                        alt={host.name}
+                        className="w-full h-full object-cover scale-105
+                        group-hover:scale-110 transition duration-700 object-top"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-8 text-center">
+                      <h2 className="font-serif text-2xl tracking-widest text-[#e6c36a] mb-2">
+                        {host.name}
+                      </h2>
+
+                      <p className="text-xs uppercase tracking-[0.3em] text-red-300/80 mb-4">
+                        {host.goddessName}
+                      </p>
+
+                      <p className="italic opacity-80 mb-6 text-sm leading-relaxed">
+                        “{host.description}”
+                      </p>
+
+                      {/* View Profile (ไม่ทำเป็นปุ่มจริง เพื่อไม่ซ้อน link) */}
+                      <div className="flex justify-center">
+                        <span
+                          className="
+                            inline-block
+                            px-6 py-2
+                            text-xs
+                            tracking-[0.35em]
+                            uppercase
+                            border border-[#e6c36a]/40
+                            text-[#e6c36a]
+                            rounded-full
+                            transition-all
+                            duration-500
+                            group-hover:bg-[#e6c36a]
+                            group-hover:text-black
+                          "
+                        >
+                          View Profile
+                        </span>
+                      </div>
+                    </div>
                   </div>
-
-                  {/* Content */}
-                  <div className="p-8 text-center">
-                    <h2 className="font-serif text-2xl tracking-widest text-[#e6c36a] mb-2">
-                      {host.name}
-                    </h2>
-
-                    <p className="text-xs uppercase tracking-[0.3em] text-red-300/80 mb-4">
-                      {host.goddessName}
-                    </p>
-
-                    <p className="italic opacity-80 mb-6 text-sm leading-relaxed">
-                      “{host.description}”
-                    </p>
-                  </div>
-                </div>
+                </Link>
               </motion.div>
             );
           })}
