@@ -12,6 +12,8 @@ import {
   deleteHost,
   ensureHostDefaults,
 } from "@/lib/host.service";
+import AdminGuard from "@/components/AdminGuard";
+
 
 type HostType =
   | "The Fallen"
@@ -526,6 +528,7 @@ export default function AdminHostsPage() {
   };
 
   return (
+    <AdminGuard>
     <main className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black text-white">
       <Navbar />
 
@@ -1048,5 +1051,6 @@ export default function AdminHostsPage() {
         )}
       </ModalShell>
     </main>
+    </AdminGuard>
   );
 }
