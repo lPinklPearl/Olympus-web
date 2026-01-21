@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import CursorGlow from "@/components/CursorGlow";
+import router from "next/router";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -81,7 +82,7 @@ export default function Home() {
           animate="show"
           className="relative z-20 max-w-3xl px-6 text-center"
         >
-          <h1 className="text-5xl md:text-6xl font-serif tracking-[0.35em] text-[#e6c36a]">
+          <h1 className="font-title text-5xl md:text-6xl font-serif tracking-[0.35em] text-[#e6c36a]">
             OLYMPUS
           </h1>
 
@@ -98,7 +99,8 @@ export default function Home() {
   onClick={() => {
     setRitual(true);
     setTimeout(() => {
-      // router.push("/booking") หรือเปิด modal
+      //  router.push("/hosts") //หรือเปิด modal
+      window.location.href = "/hosts";
     }, 1600);
   }}
   initial={false}
@@ -275,7 +277,7 @@ export default function Home() {
                 }`}
               >
                 <h3
-                  className={`font-serif text-xl mb-3 ${
+                  className={`text-xl mb-3 ${
                     rule.color === "red"
                       ? "text-red-300"
                       : "text-yellow-300"
