@@ -53,8 +53,8 @@ const TYPE_OPTIONS: Array<{
   {
     value: "Guardians",
     label: "Guardians",
-    ring: "ring-blue-500/70",
-    aura: "from-blue-800/25 via-transparent to-transparent",
+    ring: "ring-purple-500/70",
+    aura: "from-purple-700/25 via-transparent to-transparent",
   },
 ];
 
@@ -87,6 +87,13 @@ export default function HostsPage() {
   const selectedMeta =
     TYPE_OPTIONS.find((t) => t.value === selectedType) ?? TYPE_OPTIONS[0];
 
+    const getTypeMetaByHost = (host: PublicHost) => {
+  const t = String((host as any)?.title ?? ""); // ใน DB เก็บ title = HostType
+  return (
+    TYPE_OPTIONS.find((x) => x.value === (t as HostType)) ??
+    TYPE_OPTIONS[0] // fallback = All
+  );
+};
   return (
     <main className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black text-white px-6 py-32">
       <Navbar />
@@ -294,6 +301,45 @@ export default function HostsPage() {
                           "opacity-0 group-hover:opacity-100"
                         )}
                       />
+                      {(() => {
+  const meta = getTypeMetaByHost(host);
+  const show = meta.value !== "All";
+
+  return show ? (
+    <div className="absolute left-5 top-5 z-30 pointer-events-none">
+      {/* ===== OUTER AURA (ฟุ้งใหญ่) ===== */}
+      <div
+        className={cn(
+          "absolute -inset-6 rounded-full blur-2xl opacity-70 transition duration-700",
+          "bg-gradient-to-b",
+          meta.aura,
+          "group-hover:opacity-100"
+        )}
+      />
+
+      {/* ===== INNER GLOW ===== */}
+      <div
+        className={cn(
+          "absolute -inset-2 rounded-full blur-md opacity-80",
+          "bg-gradient-to-b",
+          meta.aura
+        )}
+      />
+
+      {/* ===== CORE RING ===== */}
+      <div
+        className={cn(
+          "relative w-6 h-6 rounded-full ring-4 bg-black/40",
+          meta.ring,
+          "shadow-[0_0_22px_rgba(230,195,106,0.35)]",
+          "transition duration-500 group-hover:scale-110"
+        )}
+        title={meta.label}
+        aria-label={meta.label}
+      />
+    </div>
+  ) : null;
+})()}
 
                       {/* Card */}
                       <Link href={`/hosts/${slug}`} className="block">
